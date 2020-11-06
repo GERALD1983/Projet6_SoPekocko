@@ -9,6 +9,8 @@ const userRoutes = require("./routes/user");
 const path = require("path");
 const { Session } = require("inspector");
 
+const nocache = require("nocache");
+
 mongoose
   .connect(
     "mongodb+srv://gerald:mongodb57@cluster0.tydef.mongodb.net/sopecko?retryWrites=true&w=majority",
@@ -43,6 +45,8 @@ app.use(
     },
   })
 );
+
+app.use(nocache());
 
 app.use(bodyParser.json());
 
