@@ -71,18 +71,17 @@ exports.likeSauce = (req, res, next) => {
     Sauce.updateOne(
       { _id: req.params.id },
       {
-        $inc: { likes: req.body.like++ },
+        $inc: { likes: +1 },
         $push: { usersLiked: req.body.userId },
       }
     )
       .then(() => res.status(200).json({ message: "un like en plus !" }))
       .catch((error) => res.status(400).json({ error }));
-  }
-  if (sauceObject.like === -1) {
+  } else if (sauceObject.like === -1) {
     Sauce.updateOne(
       { _id: req.params.id },
       {
-        $inc: { dislikes: req.body.like++ },
+        $inc: { dislikes: +1 },
         $push: { usersDisliked: req.body.userId },
       }
     )

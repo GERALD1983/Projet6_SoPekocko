@@ -1,11 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cookieSession = require("cookie-session");
 
 const saucesRoutes = require("./routes/sauces");
 const userRoutes = require("./routes/user");
 
 const path = require("path");
+const { Session } = require("inspector");
 
 mongoose
   .connect(
@@ -29,6 +31,18 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use(
+  cookieSession({
+    name: "session",
+    secret: "s3CuR3T3",
+    cookie: {
+      secure: false,
+      httpOnly: true,
+      domain: "http://localhost:3000/",
+    },
+  })
+);
 
 app.use(bodyParser.json());
 
