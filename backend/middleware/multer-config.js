@@ -1,3 +1,4 @@
+// variable module npm multer
 const multer = require("multer");
 
 const MIME_TYPES = {
@@ -5,6 +6,8 @@ const MIME_TYPES = {
   "image/jpeg": "jpg",
   "image/png": "png",
 };
+
+// logique pour les stockage telechargements de fichiers et modification d image avec multer
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {

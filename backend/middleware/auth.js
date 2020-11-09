@@ -1,4 +1,7 @@
+// variable module npm token
 const jwt = require("jsonwebtoken");
+
+// logique de la creation du token
 
 module.exports = (req, res, next) => {
   try {

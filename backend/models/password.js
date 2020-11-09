@@ -1,6 +1,9 @@
+// variable module npm
 const passValidator = require("password-validator");
 
 const passSchema = new passValidator();
+
+// declaration du shema du mot de passe
 
 passSchema
   .is()
@@ -19,5 +22,7 @@ passSchema
   .is()
   .not()
   .oneOf(["Passw0rd", "Password123"]);
+
+// export du shema
 
 module.exports = passSchema;

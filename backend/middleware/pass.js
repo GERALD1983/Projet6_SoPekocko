@@ -1,4 +1,7 @@
+// variable du modele du mot de passe
 const passSchema = require("../models/password");
+
+// logique du modele utiliser pour valider le mot de passe
 
 module.exports = (req, res, next) => {
   if (!passSchema.validate(req.body.password)) {
