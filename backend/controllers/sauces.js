@@ -1,6 +1,9 @@
+// variable
 const Sauce = require("../models/sauce");
 const fs = require("fs");
 const { json } = require("body-parser");
+
+// logique des sauces sur les differentes routes
 
 exports.createSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);

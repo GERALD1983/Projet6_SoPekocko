@@ -1,3 +1,4 @@
+// variables
 const bcrypt = require("bcrypt");
 const User = require("../models/users");
 
@@ -10,6 +11,8 @@ const emailMaskOptions = {
   unmaskedEndCharactersAfterAt: 1,
   maskAtTheRate: false,
 };
+
+// logique des routes d inscription et de connexion utilsateurs
 
 exports.signup = (req, res, next) => {
   bcrypt

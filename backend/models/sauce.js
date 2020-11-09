@@ -1,4 +1,7 @@
+// variable module mongoose
 const mongoose = require("mongoose");
+
+// declaration du shema de chaque sauce
 
 const sauceSchema = mongoose.Schema({
   userId: { type: String, required: true },
@@ -13,5 +16,7 @@ const sauceSchema = mongoose.Schema({
   usersLiked: { type: [String], required: true },
   usersDisliked: { type: [String], required: true },
 });
+
+// export du shema
 
 module.exports = mongoose.model("Sauce", sauceSchema);
