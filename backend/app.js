@@ -3,6 +3,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
+const helmet = require("helmet");
+const xssClean = require("xss-clean");
+
+// module npm  independance qui charge les variables d environnement
+require("dotenv").config();
 
 // variables de stockage des routes
 
@@ -21,16 +26,20 @@ const nocache = require("nocache");
 // connection a la base de donnee
 
 mongoose
-  .connect(
-    "mongodb+srv://gerald:mongodb57@cluster0.tydef.mongodb.net/sopecko?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(process.env.LIEN, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 // appel  d express dans applicaion
 
 const app = express();
+
+// methode securite helmet
+
+app.use(helmet());
 
 // methode pour modifier le cors le systeme de securite
 
@@ -69,6 +78,11 @@ app.disable("x-powered-by");
 
 // pour les demandes de post traite l objet json
 app.use(bodyParser.json());
+
+//methode faille xss nettoie
+// les entrées utilisateur provenant du corps POST, des requêtes GET et des paramètres d'URL
+
+app.use(xssClean());
 
 // gere les images dans le fichier image qui est statique
 app.use("/images", express.static(path.join(__dirname, "images")));
